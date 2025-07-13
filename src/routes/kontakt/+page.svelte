@@ -1,24 +1,7 @@
 <script lang="ts">
-  import { browser } from '$app/environment';
-  import { onMount } from 'svelte';
-  
   let name = '';
   let email = '';
   let message = '';
-  let showThankYou = false;
-  
-  onMount(() => {
-    if (browser) {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('success') === 'true') {
-        showThankYou = true;
-        setTimeout(() => {
-          showThankYou = false;
-          window.history.replaceState({}, '', '/kontakt');
-        }, 5000);
-      }
-    }
-  });
 </script>
 
 <svelte:head>
@@ -68,20 +51,13 @@
     </div>
 
     <div class="contact-form-section">
-      {#if showThankYou}
-        <div class="thank-you-message">
-          <div class="thank-you-icon">✨</div>
-          <h3>DZIĘKUJEMY!</h3>
-          <p>Twoja wiadomość została pomyślnie wysłana!<br>Otrzymaliśmy ją i skontaktujemy się z Tobą wkrótce na podany przez Ciebie adres email.</p>
-        </div>
-      {:else}
         <form 
           class="contact-form" 
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           name="contact"
           method="POST"
-          action="/kontakt?success=true"
+          action="/dziekujemy"
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
@@ -130,7 +106,6 @@
             WYŚLIJ WIADOMOŚĆ
           </button>
         </form>
-      {/if}
     </div>
   </div>
 
@@ -343,46 +318,7 @@
     cursor: not-allowed;
   }
 
-  .thank-you-message {
-    text-align: center;
-    padding: 2rem;
-    animation: fadeIn 0.5s ease-out;
-  }
 
-  .thank-you-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    animation: bounce 2s infinite;
-  }
-
-  .thank-you-message h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #ffffff;
-  }
-
-  .thank-you-message p {
-    font-size: 1.1rem;
-    color: #cccccc;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-  }
-
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
-  }
 
   @keyframes fadeIn {
     from {
