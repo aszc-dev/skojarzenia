@@ -20,7 +20,7 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; 2024 Skojarzenia. Oczyszczanie umysłu przez twórczość.</p>
+    <p>&copy; 2025 Skojarzenia. Stworzono z pasją przez Adam Szczepański & Cursor AI.</p>
   </footer>
 </div>
 

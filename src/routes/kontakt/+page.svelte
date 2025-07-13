@@ -115,7 +115,7 @@
     <div class="social-links">
       <h3 class="social-title">ZNAJDŹ NAS</h3>
       <div class="social-grid">
-        <a href="mailto:hello@skojarzenia.pl" class="social-link">
+        <a href="mailto:hi@aszc.dev" class="social-link">
           <div class="social-icon">✉️</div>
           <span>EMAIL</span>
         </a>
