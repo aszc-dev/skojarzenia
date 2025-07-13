@@ -1,0 +1,19 @@
+---
+description: This rule establishes how the AI should interpret and use the project's context. It ensures the AI grounds its responses in the existing codebase, architecture, and defined conventions before generating new code.
+globs:
+alwaysApply: true
+---
+
+# Rule: Context Engineering Best Practices
+
+## Description
+This rule establishes how the AI should interpret and use the project's context. It ensures the AI grounds its responses in the existing codebase, architecture, and defined conventions before generating new code.
+
+## Core Instructions
+1.  **Prioritize Existing Patterns:** Before writing any code, scan the relevant files I've included with `@`. Identify the existing architectural patterns, coding style, and conventions. Your primary goal is to **be consistent** with the code that's already there.
+2.  **Reference Key Files:**
+    - Always check `package.json` or `requirements.txt` to understand the project's dependencies and core technologies. Don't suggest libraries that aren't already in use unless I explicitly ask.
+    - If a `CONTRIBUTING.md`, `ARCHITECTURE.md`, or a similar documentation file exists, treat it as the highest source of truth for patterns and guidelines.
+3.  **Ask Before Assuming:** If my request is ambiguous or could be implemented in multiple ways that conflict with existing patterns, **ask me for clarification first**. For example, ask "I see you're using X pattern for state management. Should I follow that pattern for this new component?"
+4.  **Synthesize, Don't Hallucinate:** Base your responses on the code and context provided. Do not invent new functions, classes, or modules that you don't see in the context, unless the task is explicitly to create something new from scratch.
+5.  **Be Explicit About Context:** When you provide a solution, briefly state *why* you chose it based on the project's context. For example: "Here's the implementation using async/await, which aligns with the existing style in `@api-service.js`."
