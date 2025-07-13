@@ -1,25 +1,36 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
+  
   let name = '';
   let email = '';
   let message = '';
   let showThankYou = false;
   
-  function handleSubmit() {
-    if (name.trim() && email.trim() && message.trim()) {
-      showThankYou = true;
-      setTimeout(() => {
-        showThankYou = false;
-        name = '';
-        email = '';
-        message = '';
-      }, 3000);
+  onMount(() => {
+    if (browser) {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('success') === 'true') {
+        showThankYou = true;
+        setTimeout(() => {
+          showThankYou = false;
+          window.history.replaceState({}, '', '/kontakt');
+        }, 5000);
+      }
     }
-  }
+  });
 </script>
 
 <svelte:head>
   <title>Kontakt - Skojarzenia</title>
 </svelte:head>
+
+<!-- Hidden form for Netlify Forms discovery -->
+<form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <textarea name="message"></textarea>
+</form>
 
 <div class="contact-container">
   <div class="contact-header">
@@ -61,16 +72,26 @@
         <div class="thank-you-message">
           <div class="thank-you-icon">✨</div>
           <h3>DZIĘKUJEMY!</h3>
-          <p>Twoja wiadomość została wysłana.<br>Skontaktujemy się z Tobą wkrótce.</p>
+          <p>Twoja wiadomość została pomyślnie wysłana!<br>Otrzymaliśmy ją i skontaktujemy się z Tobą wkrótce na podany przez Ciebie adres email.</p>
         </div>
       {:else}
-        <form class="contact-form" on:submit|preventDefault={handleSubmit}>
+        <form 
+          class="contact-form" 
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          name="contact"
+          method="POST"
+          action="/kontakt?success=true"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="bot-field" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
           <div class="form-group">
             <label for="name" class="form-label">TWOJE IMIĘ</label>
             <input
               id="name"
+              name="name"
               type="text"
               bind:value={name}
               class="form-input"
@@ -83,6 +104,7 @@
             <label for="email" class="form-label">ADRES EMAIL</label>
             <input
               id="email"
+              name="email"
               type="email"
               bind:value={email}
               class="form-input"
@@ -95,6 +117,7 @@
             <label for="message" class="form-label">WIADOMOŚĆ</label>
             <textarea
               id="message"
+              name="message"
               bind:value={message}
               class="form-textarea"
               placeholder="CO CHCESZ NAM PRZEKAZAĆ?"
