@@ -60,10 +60,11 @@
     <div class="contact-form-section">
         <form 
           class="contact-form" 
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
           name="contact"
           method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          data-sveltekit-reload
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
