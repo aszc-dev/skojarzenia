@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from '$app/forms';
   import Mail from '@lucide/svelte/icons/mail';
   import Github from '@lucide/svelte/icons/github';
   import Twitter from '@lucide/svelte/icons/twitter';
@@ -61,7 +62,7 @@
           data-netlify-honeypot="bot-field"
           name="contact"
           method="POST"
-          action="/dziekujemy"
+          use:enhance
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
