@@ -1,5 +1,9 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import Brain from '@lucide/svelte/icons/brain';
+  import Zap from '@lucide/svelte/icons/zap';
+  import Target from '@lucide/svelte/icons/target';
+  import Star from '@lucide/svelte/icons/star';
   
   function startGame() {
     goto('/gra');
@@ -35,7 +39,9 @@
     <h2 class="section-title">DLACZEGO SKOJARZENIA?</h2>
     <div class="benefits-grid">
       <div class="benefit-card">
-        <div class="benefit-icon">🧠</div>
+        <div class="benefit-icon">
+          <Brain size={48} />
+        </div>
         <h3>OCZYSZCZANIE UMYSŁU</h3>
         <p>
           Wypisywanie chaotycznych myśli na papier pozwala uporządkować chaos 
@@ -44,7 +50,9 @@
       </div>
       
       <div class="benefit-card">
-        <div class="benefit-icon">⚡</div>
+        <div class="benefit-icon">
+          <Zap size={48} />
+        </div>
         <h3>UWOLNIENIE KREATYWNOŚCI</h3>
         <p>
           Swobodne skojarzenia otwierają nieoczekiwane ścieżki myślenia, 
@@ -53,7 +61,9 @@
       </div>
       
       <div class="benefit-card">
-        <div class="benefit-icon">🎯</div>
+        <div class="benefit-icon">
+          <Target size={48} />
+        </div>
         <h3>REDUKCJA STRESU</h3>
         <p>
           Gdy myśli przestają krążyć w kółko w głowie, umysł znajduje 
@@ -62,7 +72,9 @@
       </div>
       
       <div class="benefit-card">
-        <div class="benefit-icon">🌟</div>
+        <div class="benefit-icon">
+          <Star size={48} />
+        </div>
         <h3>ODKRYWANIE SIEBIE</h3>
         <p>
           Łańcuchy skojarzeń ujawniają ukryte połączenia między myślami, 
@@ -264,8 +276,11 @@
   }
 
   .benefit-icon {
-    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1rem;
+    color: #ffffff;
   }
 
   .benefit-card h3 {
