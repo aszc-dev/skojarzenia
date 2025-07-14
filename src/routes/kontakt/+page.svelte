@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { enhance } from '$app/forms';
+  import { goto } from '$app/navigation';
   import Mail from '@lucide/svelte/icons/mail';
   import Github from '@lucide/svelte/icons/github';
   import Twitter from '@lucide/svelte/icons/twitter';
@@ -7,6 +7,12 @@
   let name = '';
   let email = '';
   let message = '';
+
+  function handleSubmit() {
+    setTimeout(() => {
+      goto('/dziekujemy');
+    }, 1000);
+  }
 </script>
 
 <svelte:head>
@@ -62,7 +68,7 @@
           data-netlify-honeypot="bot-field"
           name="contact"
           method="POST"
-          use:enhance
+          on:submit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
