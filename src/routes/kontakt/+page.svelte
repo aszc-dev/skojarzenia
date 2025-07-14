@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Mail, Github, Twitter } from '@lucide/svelte';
+  import Mail from '@lucide/svelte/icons/mail';
+  import Github from '@lucide/svelte/icons/github';
+  import Twitter from '@lucide/svelte/icons/twitter';
 
   let name = '';
   let email = '';

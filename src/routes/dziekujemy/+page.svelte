@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
-  import { Sparkles } from '@lucide/svelte';
+  import Sparkles from '@lucide/svelte/icons/sparkles';
 
   onMount(() => {
     setTimeout(() => {
