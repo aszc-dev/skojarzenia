@@ -16,6 +16,7 @@
 <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
   <input type="hidden" name="form-name" value="contact" />
   <input type="hidden" name="bot-field" />
+  <input type="hidden" name="_next" value="/dziekujemy" />
   <input type="text" name="name" />
   <input type="email" name="email" />
   <textarea name="message"></textarea>
@@ -63,10 +64,10 @@
           data-netlify-honeypot="bot-field"
           name="contact"
           method="POST"
-          action="/dziekujemy"
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
+          <input type="hidden" name="_next" value="/dziekujemy" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
           <div class="form-group">
