@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { dev } from '$app/environment';
   import { goto } from '$app/navigation';
   import Mail from '@lucide/svelte/icons/mail';
   import Github from '@lucide/svelte/icons/github';
@@ -8,10 +9,13 @@
   let email = '';
   let message = '';
 
-  function handleSubmit() {
-    setTimeout(() => {
+  function handleSubmit(event: Event) {
+    if (dev) {
+      event.preventDefault();
+      console.log('Development mode: Form submission prevented');
+      console.log({ name, email, message });
       goto('/dziekujemy');
-    }, 1000);
+    }
   }
 </script>
 
@@ -23,6 +27,7 @@
 <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
   <input type="hidden" name="form-name" value="contact" />
   <input type="hidden" name="bot-field" />
+  <input type="hidden" name="_next" value="/dziekujemy" />
   <input type="text" name="name" />
   <input type="email" name="email" />
   <textarea name="message"></textarea>
@@ -70,11 +75,11 @@
           data-netlify-honeypot="bot-field"
           name="contact"
           method="POST"
-          action="/dziekujemy"
           on:submit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
+          <input type="hidden" name="_next" value="/dziekujemy" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
           <div class="form-group">
