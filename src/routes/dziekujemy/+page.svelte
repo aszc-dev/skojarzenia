@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
+  import { Sparkles } from '@lucide/svelte';
 
   onMount(() => {
     setTimeout(() => {
@@ -15,7 +16,9 @@
 
 <div class="thank-you-page">
   <div class="thank-you-content">
-    <div class="thank-you-icon">✨</div>
+    <div class="thank-you-icon">
+      <Sparkles size={64} />
+    </div>
     <h1 class="thank-you-title">DZIĘKUJEMY!</h1>
     <p class="thank-you-message">
       Twoja wiadomość została pomyślnie wysłana!<br>
@@ -54,8 +57,11 @@
   }
 
   .thank-you-icon {
-    font-size: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 2rem;
+    color: #ffffff;
     animation: bounce 2s infinite;
   }
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { Mail, Github, Twitter } from '@lucide/svelte';
+
   let name = '';
   let email = '';
   let message = '';
@@ -114,15 +116,21 @@
       <h3 class="social-title">ZNAJDŹ NAS</h3>
       <div class="social-grid">
         <a href="mailto:hi@aszc.dev" class="social-link">
-          <div class="social-icon">✉️</div>
+          <div class="social-icon">
+            <Mail size={32} />
+          </div>
           <span>EMAIL</span>
         </a>
         <a href="https://github.com/skojarzenia" class="social-link">
-          <div class="social-icon">🐙</div>
+          <div class="social-icon">
+            <Github size={32} />
+          </div>
           <span>GITHUB</span>
         </a>
         <a href="https://twitter.com/skojarzenia" class="social-link">
-          <div class="social-icon">🐦</div>
+          <div class="social-icon">
+            <Twitter size={32} />
+          </div>
           <span>TWITTER</span>
         </a>
       </div>
@@ -388,8 +396,16 @@
     transform: translateY(-2px);
   }
 
+  .social-link:hover .social-icon {
+    color: #ffffff;
+  }
+
   .social-icon {
-    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cccccc;
+    transition: color 0.3s ease;
   }
 
   .philosophy {
