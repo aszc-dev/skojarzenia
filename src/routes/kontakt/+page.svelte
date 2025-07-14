@@ -10,11 +10,17 @@
   let message = '';
 
   function handleSubmit(event: Event) {
-    if (dev) {
+    console.log('handleSubmit called');
+    console.log('dev:', dev);
+    console.log('hostname:', typeof window !== 'undefined' ? window.location.hostname : 'server');
+    
+    const isLocalDev = dev || (typeof window !== 'undefined' && window.location.hostname === 'localhost');
+    
+    if (isLocalDev) {
       event.preventDefault();
       console.log('Development mode: Form submission prevented');
-      console.log({ name, email, message });
-      goto('/dziekujemy');
+      console.log('Form data:', { name, email, message });
+      setTimeout(() => goto('/dziekujemy'), 100);
     }
   }
 </script>
