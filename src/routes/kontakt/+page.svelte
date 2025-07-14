@@ -21,6 +21,8 @@
 
 <!-- Hidden form for Netlify Forms discovery -->
 <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="bot-field" />
   <input type="text" name="name" />
   <input type="email" name="email" />
   <textarea name="message"></textarea>
