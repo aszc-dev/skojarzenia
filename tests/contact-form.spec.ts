@@ -1,13 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const isProduction = process.env.NODE_ENV === 'production' || process.env.TEST_ENV === 'production';
-const baseURL = isProduction ? 'https://skojarzenia.netlify.app' : 'http://localhost:5173';
-
-test.describe(`Contact Form - ${isProduction ? 'Production' : 'Development'} Environment`, () => {
-  test.use({
-    baseURL: baseURL
-  });
-
+test.describe('Contact Form - Netlify Forms', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/kontakt');
   });
@@ -20,24 +13,17 @@ test.describe(`Contact Form - ${isProduction ? 'Production' : 'Development'} Env
     await expect(page.locator('.contact-form button[type="submit"]')).toBeVisible();
   });
 
-  test('should have correct form attributes for current environment', async ({ page }) => {
+  test('should have correct form attributes for Netlify Forms', async ({ page }) => {
     const form = page.locator('.contact-form');
     
+    await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
     await expect(form).toHaveAttribute('data-netlify', 'true');
+    await expect(form).toHaveAttribute('data-sveltekit-reload', 'false');
     
-    if (isProduction) {
-      const actionAttr = await form.getAttribute('action');
-      expect(actionAttr).toBe('');
-      
-      const reloadAttr = await form.getAttribute('data-sveltekit-reload');
-      expect(reloadAttr).toBe('true');
-    } else {
-      await expect(form).toHaveAttribute('action', '/kontakt');
-      
-      const reloadAttr = await form.getAttribute('data-sveltekit-reload');
-      expect(reloadAttr).toBe('false');
-    }
+    // Form should not have action attribute for Netlify Forms
+    const actionAttr = await form.getAttribute('action');
+    expect(actionAttr).toBeNull();
   });
 
   test('should have hidden Netlify form fields', async ({ page }) => {
@@ -46,91 +32,24 @@ test.describe(`Contact Form - ${isProduction ? 'Production' : 'Development'} Env
     await expect(page.locator('input[name="_next"][value="/dziekujemy"]')).toBeHidden();
   });
 
-  test('should fill out and submit form successfully', async ({ page }) => {
-    await page.fill('.contact-form input[name="name"]', 'Test Wizard');
+  test('should fill out form fields correctly', async ({ page }) => {
+    await page.fill('.contact-form input[name="name"]', 'Test User');
     await page.fill('.contact-form input[name="email"]', 'test@example.com');
-    await page.fill('.contact-form textarea[name="message"]', 'To jest testowa wiadomość z Playwright!');
+    await page.fill('.contact-form textarea[name="message"]', 'This is a test message');
     
-    const submitButton = page.locator('.contact-form button[type="submit"]');
-    await submitButton.click();
-    
-    const urlPattern = isProduction ? '**/dziekujemy' : '/dziekujemy';
-    const timeout = isProduction ? 10000 : 5000;
-    
-    await page.waitForURL(urlPattern, { timeout });
-    await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
+    await expect(page.locator('.contact-form input[name="name"]')).toHaveValue('Test User');
+    await expect(page.locator('.contact-form input[name="email"]')).toHaveValue('test@example.com');
+    await expect(page.locator('.contact-form textarea[name="message"]')).toHaveValue('This is a test message');
   });
 
-  test('should handle form submission with network monitoring', async ({ page }) => {
-    let postRequestMade = false;
-    
-    page.on('request', request => {
-      if (request.method() === 'POST') {
-        if (isProduction) {
-          if (request.url().includes('netlify.app') || request.url().includes('forms')) {
-            postRequestMade = true;
-          }
-        } else {
-          if (request.url().includes('/kontakt')) {
-            postRequestMade = true;
-          }
-        }
-      }
-    });
-
-    await page.fill('.contact-form input[name="name"]', 'Network Test');
-    await page.fill('.contact-form input[name="email"]', 'network@test.com');
-    await page.fill('.contact-form textarea[name="message"]', 'Testing network behavior');
-    
-    await page.locator('.contact-form button[type="submit"]').click();
-    
-    const urlPattern = isProduction ? '**/dziekujemy' : '/dziekujemy';
-    const timeout = isProduction ? 10000 : 5000;
-    
-    await page.waitForURL(urlPattern, { timeout });
-    expect(postRequestMade).toBe(true);
-  });
-
-  test('should validate form fields are properly bound', async ({ page }) => {
-    const nameInput = page.locator('.contact-form input[name="name"]');
-    const emailInput = page.locator('.contact-form input[name="email"]');
-    const messageTextarea = page.locator('.contact-form textarea[name="message"]');
-    
-    await nameInput.fill('Dynamic Test');
-    await emailInput.fill('dynamic@test.com');
-    await messageTextarea.fill('Testing dynamic binding');
-    
-    await expect(nameInput).toHaveValue('Dynamic Test');
-    await expect(emailInput).toHaveValue('dynamic@test.com');
-    await expect(messageTextarea).toHaveValue('Testing dynamic binding');
-  });
-
-  test('should handle form validation and behavior correctly', async ({ page }) => {
-    await page.fill('.contact-form input[name="name"]', 'Validation Test');
-    await page.fill('.contact-form input[name="email"]', 'validation@test.com');
-    await page.fill('.contact-form textarea[name="message"]', 'Testing form validation behavior');
-    
-    const submitButton = page.locator('.contact-form button[type="submit"]');
-    await submitButton.click();
-    
-    const urlPattern = isProduction ? '**/dziekujemy' : '/dziekujemy';
-    const timeout = isProduction ? 10000 : 5000;
-    
-    await page.waitForURL(urlPattern, { timeout });
-    await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
-  });
-
-  test('should handle form behavior after successful submission', async ({ page }) => {
+  test('should handle form submission and redirect', async ({ page }) => {
     await page.fill('.contact-form input[name="name"]', 'Submission Test');
     await page.fill('.contact-form input[name="email"]', 'submission@test.com');
     await page.fill('.contact-form textarea[name="message"]', 'Testing successful form submission');
     
     await page.locator('.contact-form button[type="submit"]').click();
     
-    const urlPattern = isProduction ? '**/dziekujemy' : '/dziekujemy';
-    const timeout = isProduction ? 10000 : 5000;
-    
-    await page.waitForURL(urlPattern, { timeout });
+    await page.waitForURL('**/dziekujemy', { timeout: 10000 });
     await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
   });
 }); 

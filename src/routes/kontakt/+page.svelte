@@ -2,7 +2,6 @@
   import Mail from '@lucide/svelte/icons/mail';
   import Github from '@lucide/svelte/icons/github';
   import Twitter from '@lucide/svelte/icons/twitter';
-  import { dev } from '$app/environment';
   let name = '';
   let email = '';
   let message = '';
@@ -55,10 +54,9 @@
           class="contact-form" 
           name="contact"
           method="POST"
-          action={dev ? '/kontakt' : ''}
           data-netlify="true"
           data-netlify-honeypot="bot-field"
-          data-sveltekit-reload={!dev}
+          data-sveltekit-reload="false"
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
