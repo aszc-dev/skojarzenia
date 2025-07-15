@@ -50,11 +50,13 @@
     </div>
 
     <div class="contact-form-section">
+        <!-- Netlify Forms require this comment for proper detection -->
         <form 
           class="contact-form" 
           name="contact"
           method="POST"
-          action={dev ? '/kontakt' : undefined}
+          action={dev ? '/kontakt' : null}
+          enctype="application/x-www-form-urlencoded"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           data-sveltekit-reload={!dev}
