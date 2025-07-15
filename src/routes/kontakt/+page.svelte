@@ -2,7 +2,7 @@
   import Mail from '@lucide/svelte/icons/mail';
   import Github from '@lucide/svelte/icons/github';
   import Twitter from '@lucide/svelte/icons/twitter';
-
+  import { dev } from '$app/environment';
   let name = '';
   let email = '';
   let message = '';
@@ -12,15 +12,7 @@
   <title>Kontakt - Skojarzenia</title>
 </svelte:head>
 
-<!-- Hidden form for Netlify Forms discovery -->
-<form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
-  <input type="hidden" name="form-name" value="contact" />
-  <input type="hidden" name="bot-field" />
-  <input type="hidden" name="_next" value="/dziekujemy" />
-  <input type="text" name="name" />
-  <input type="email" name="email" />
-  <textarea name="message"></textarea>
-</form>
+
 
 <div class="contact-container">
   <div class="contact-header">
@@ -62,9 +54,10 @@
           class="contact-form" 
           name="contact"
           method="POST"
+          action={dev ? '/kontakt' : undefined}
           data-netlify="true"
           data-netlify-honeypot="bot-field"
-          data-sveltekit-reload
+          data-sveltekit-reload={!dev}
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
