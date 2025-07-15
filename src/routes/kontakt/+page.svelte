@@ -54,13 +54,13 @@
           class="contact-form" 
           name="contact"
           method="POST"
+          action="/dziekujemy"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           data-sveltekit-reload="false"
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="_next" value="/dziekujemy" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
           <div class="form-group">

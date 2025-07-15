@@ -18,18 +18,14 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
+    await expect(form).toHaveAttribute('action', '/dziekujemy');
     await expect(form).toHaveAttribute('data-netlify', 'true');
     await expect(form).toHaveAttribute('data-sveltekit-reload', 'false');
-    
-    // Form should not have action attribute for Netlify Forms
-    const actionAttr = await form.getAttribute('action');
-    expect(actionAttr).toBeNull();
   });
 
   test('should have hidden Netlify form fields', async ({ page }) => {
     await expect(page.locator('input[name="form-name"][value="contact"]')).toBeHidden();
     await expect(page.locator('input[name="bot-field"]')).toBeHidden();
-    await expect(page.locator('input[name="_next"][value="/dziekujemy"]')).toBeHidden();
   });
 
   test('should fill out form fields correctly', async ({ page }) => {
