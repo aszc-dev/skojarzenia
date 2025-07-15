@@ -28,7 +28,7 @@ test.describe(`Contact Form - ${isProduction ? 'Production' : 'Development'} Env
     
     if (isProduction) {
       const actionAttr = await form.getAttribute('action');
-      expect(actionAttr).toBeNull();
+      expect(actionAttr).toBe('');
       
       const reloadAttr = await form.getAttribute('data-sveltekit-reload');
       expect(reloadAttr).toBe('true');
