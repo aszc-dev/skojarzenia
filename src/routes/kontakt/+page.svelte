@@ -56,7 +56,6 @@
           method="POST"
           action="/dziekujemy"
           data-netlify="true"
-          data-sveltekit-reload="true"
         >
           <input type="hidden" name="form-name" value="contact" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
