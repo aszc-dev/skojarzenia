@@ -56,14 +56,9 @@
           method="POST"
           action="/dziekujemy"
           data-netlify="true"
-          netlify-honeypot="bot-field"
+          data-sveltekit-reload="false"
         >
           <input type="hidden" name="form-name" value="contact" />
-          <p class="hidden">
-            <label>
-              Don't fill this out if you're human: <input name="bot-field" type="text" />
-            </label>
-          </p>
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
           <div class="form-group">
@@ -325,10 +320,6 @@
   .submit-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-
-  .hidden {
-    display: none;
   }
 
 
