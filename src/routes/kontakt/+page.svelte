@@ -56,11 +56,11 @@
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
-          data-sveltekit-reload="false"
+          data-sveltekit-reload="true"
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" />
-          <input type="hidden" name="_next" value="https://skojarzenia.netlify.app/dziekujemy" />
+          <input type="hidden" name="_next" value="/dziekujemy" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
           <div class="form-group">

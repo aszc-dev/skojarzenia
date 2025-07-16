@@ -19,7 +19,7 @@ test.describe('Contact Form - Netlify Forms', () => {
     await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
     await expect(form).toHaveAttribute('data-netlify', 'true');
-    await expect(form).toHaveAttribute('data-sveltekit-reload', 'false');
+    await expect(form).toHaveAttribute('data-sveltekit-reload', 'true');
   });
 
   test('should have hidden Netlify form fields', async ({ page }) => {
