@@ -18,7 +18,6 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
-    await expect(form).toHaveAttribute('action', '/dziekujemy');
     await expect(form).toHaveAttribute('data-netlify', 'true');
     await expect(form).toHaveAttribute('data-sveltekit-reload', 'false');
   });
@@ -26,6 +25,7 @@ test.describe('Contact Form - Netlify Forms', () => {
   test('should have hidden Netlify form fields', async ({ page }) => {
     await expect(page.locator('input[name="form-name"][value="contact"]')).toBeHidden();
     await expect(page.locator('input[name="bot-field"]')).toBeHidden();
+    await expect(page.locator('input[name="_next"]')).toBeHidden();
   });
 
   test('should fill out form fields correctly', async ({ page }) => {
@@ -45,7 +45,7 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await page.locator('.contact-form button[type="submit"]').click();
     
-    await page.waitForURL('**/dziekujemy', { timeout: 10000 });
+    await page.waitForURL('**/dziekujemy', { timeout: 1000 });
     await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
   });
 }); 
