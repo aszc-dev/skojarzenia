@@ -49,7 +49,15 @@
     </div>
 
     <div class="contact-form-section">
-        <!-- Netlify Forms require this comment for proper detection -->
+        <!-- Netlify Forms discovery form -->
+        <form name="contact" method="POST" action="/dziekujemy" data-netlify="true" hidden>
+          <input type="text" name="name" />
+          <input type="email" name="email" />
+          <textarea name="message"></textarea>
+          <input type="text" name="bot-field" />
+        </form>
+        
+        <!-- Actual form -->
         <form 
           class="contact-form" 
           name="contact"
