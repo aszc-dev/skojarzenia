@@ -321,6 +321,10 @@
     cursor: not-allowed;
   }
 
+  .hidden {
+    display: none;
+  }
+
 
 
   @keyframes fadeIn {
