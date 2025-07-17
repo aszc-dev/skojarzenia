@@ -55,6 +55,7 @@
           method="POST"
           action="/dziekujemy"
           data-netlify="true"
+          data-sveltekit-reload
         >
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
@@ -114,7 +115,7 @@
           </div>
           <span>EMAIL</span>
         </a>
-        <a href="https://github.com/skojarzenia" class="social-link">
+        <a href="https://github.com/aszc-dev/skojarzenia/" class="social-link">
           <div class="social-icon">
             <Github size={32} />
           </div>
@@ -317,10 +318,6 @@
   .submit-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-
-  .hidden {
-    display: none;
   }
 
 
