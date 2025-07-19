@@ -5,6 +5,26 @@
   let name = '';
   let email = '';
   let message = '';
+  
+  function handleSubmit(event: Event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target as HTMLFormElement);
+    
+    fetch('/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(formData as any).toString()
+    })
+    .then(() => {
+      window.location.href = '/dziekujemy';
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
 </script>
 
 <svelte:head>
@@ -53,9 +73,10 @@
           class="contact-form" 
           name="contact"
           method="POST"
-          action="/dziekujemy"
+          action="#"
           data-netlify="true"
           data-sveltekit-reload
+          on:submit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
