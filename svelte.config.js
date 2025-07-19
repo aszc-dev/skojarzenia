@@ -9,7 +9,10 @@ const config = {
 
 	kit: {
 		// Using Netlify adapter for seamless deployment
-		adapter: adapter()
+		adapter: adapter({
+			// Enable form processing
+			forms: true
+		})
 	}
 };
 

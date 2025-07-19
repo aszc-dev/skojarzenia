@@ -57,6 +57,7 @@
           data-netlify="true"
           data-sveltekit-reload
         >
+          <input type="hidden" name="form-name" value="contact" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
           
           <div class="form-group">
