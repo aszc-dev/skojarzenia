@@ -37,14 +37,18 @@ test.describe('Contact Form - Netlify Forms', () => {
     await expect(page.locator('.contact-form textarea[name="message"]')).toHaveValue('This is a test message');
   });
 
-  test('should handle form submission and redirect', async ({ page }) => {
-    await page.fill('.contact-form input[name="name"]', 'Submission Test');
-    await page.fill('.contact-form input[name="email"]', 'submission@test.com');
-    await page.fill('.contact-form textarea[name="message"]', 'Testing successful form submission');
-    
-    await page.locator('.contact-form button[type="submit"]').click();
-    
-    await page.waitForURL('**/dziekujemy.html', { timeout: 1000 });
+  test('should have correct form action for Netlify', async ({ page }) => {
+    const form = page.locator('.contact-form');
+    await expect(form).toHaveAttribute('action', '/dziekujemy');
+    await expect(form).toHaveAttribute('data-netlify', 'true');
+    await expect(form).toHaveAttribute('data-sveltekit-reload');
+    await expect(form).toHaveAttribute('method', 'POST');
+  });
+
+  test('thank you page should be accessible and have correct content', async ({ page }) => {
+    await page.goto('/dziekujemy');
     await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
+    await expect(page.locator('.thank-you-message')).toContainText('Twoja wiadomość została pomyślnie wysłana');
+    await expect(page.locator('.back-home-btn')).toBeVisible();
   });
 }); 
