@@ -18,7 +18,7 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
-    await expect(form).toHaveAttribute('action', '/dziekujemy');
+    await expect(form).toHaveAttribute('action', '#');
 
   });
 
@@ -40,7 +40,7 @@ test.describe('Contact Form - Netlify Forms', () => {
 
   test('should have correct form configuration for Netlify', async ({ page }) => {
     const form = page.locator('.contact-form');
-    await expect(form).toHaveAttribute('action', '/dziekujemy');
+    await expect(form).toHaveAttribute('action', '#');
     await expect(form).toHaveAttribute('data-sveltekit-reload');
     await expect(form).toHaveAttribute('method', 'POST');
     await expect(form).toHaveAttribute('name', 'contact');
@@ -57,5 +57,20 @@ test.describe('Contact Form - Netlify Forms', () => {
     await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
     await expect(page.locator('.thank-you-message')).toContainText('Twoja wiadomość została pomyślnie wysłana');
     await expect(page.locator('.back-home-btn')).toBeVisible();
+  });
+
+  test('should submit form and redirect to thank you page', async ({ page }) => {
+    // Wypełnij formularz
+    await page.fill('.contact-form input[name="name"]', 'Test Playwright User');
+    await page.fill('.contact-form input[name="email"]', 'playwright-test@example.com');
+    await page.fill('.contact-form textarea[name="message"]', 'This is an automated test submission from Playwright');
+    
+    // Wyślij formularz
+    await page.click('.contact-form button[type="submit"]');
+    
+    // Sprawdź czy zostaliśmy przekierowani na stronę dziękujemy
+    await page.waitForURL('/dziekujemy');
+    await expect(page).toHaveURL('/dziekujemy');
+    await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
   });
 }); 
