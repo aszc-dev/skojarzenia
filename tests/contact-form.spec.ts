@@ -18,7 +18,7 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
-    await expect(form).toHaveAttribute('action', '/dziekujemy.html');
+    await expect(form).toHaveAttribute('action', '/dziekujemy');
     await expect(form).toHaveAttribute('data-netlify', 'true');
   });
 

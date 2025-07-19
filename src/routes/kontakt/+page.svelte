@@ -53,7 +53,7 @@
           class="contact-form" 
           name="contact"
           method="POST"
-          action="/dziekujemy.html"
+          action="/dziekujemy"
           data-netlify="true"
           data-sveltekit-reload
         >
