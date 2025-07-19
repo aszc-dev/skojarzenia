@@ -98,7 +98,7 @@
             ></textarea>
           </div>
 
-          <button type="submit" class="submit-btn" disabled={!name.trim() || !email.trim() || !message.trim()}>
+          <button type="submit" class="submit-btn">
             WYŚLIJ WIADOMOŚĆ
           </button>
         </form>
