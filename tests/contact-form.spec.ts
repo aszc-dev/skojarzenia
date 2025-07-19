@@ -18,7 +18,7 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
-    await expect(form).toHaveAttribute('action', '/dziekujemy');
+    await expect(form).toHaveAttribute('action', '/dziekujemy.html');
     await expect(form).toHaveAttribute('data-netlify', 'true');
   });
 
@@ -44,7 +44,7 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await page.locator('.contact-form button[type="submit"]').click();
     
-    await page.waitForURL('**/dziekujemy', { timeout: 1000 });
+    await page.waitForURL('**/dziekujemy.html', { timeout: 1000 });
     await expect(page.locator('h1')).toContainText('DZIĘKUJEMY!');
   });
 }); 

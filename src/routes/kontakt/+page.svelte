@@ -1,7 +1,7 @@
 <script lang="ts">
   import Mail from '@lucide/svelte/icons/mail';
   import Github from '@lucide/svelte/icons/github';
-  import Twitter from '@lucide/svelte/icons/twitter';
+  import Discord from '@lucide/svelte/icons/message-circle';
   let name = '';
   let email = '';
   let message = '';
@@ -53,7 +53,7 @@
           class="contact-form" 
           name="contact"
           method="POST"
-          action="/dziekujemy"
+          action="/dziekujemy.html"
           data-netlify="true"
           data-sveltekit-reload
         >
@@ -121,11 +121,11 @@
           </div>
           <span>GITHUB</span>
         </a>
-        <a href="https://twitter.com/skojarzenia" class="social-link">
+        <a href="https://x.com/aszc_dev" class="social-link">
           <div class="social-icon">
-            <Twitter size={32} />
+            <Discord size={32} />
           </div>
-          <span>TWITTER</span>
+          <span>X</span>
         </a>
       </div>
     </div>
