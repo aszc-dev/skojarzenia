@@ -127,18 +127,29 @@
         </div>
       {:else}
         <div class="word-chain">
-          {#each wordChain as word, index}
-            <div 
-              class="word-item" 
-              class:current={index === wordChain.length - 1}
-              style="animation-delay: {index * 0.1}s"
-            >
-              {word}
-              {#if index < wordChain.length - 1}
-                <div class="arrow">↓</div>
-              {/if}
+          <!-- Poprzednie słowa (maksymalnie 3, zanikające w górę) -->
+          {#if wordChain.length > 1}
+            <div class="previous-words">
+              {#each wordChain.slice(-4, -1).reverse() as word, index}
+                <div 
+                  class="word-item previous" 
+                  class:fade-3={index === 0}
+                  class:fade-2={index === 1} 
+                  class:fade-1={index === 2}
+                  style="animation-delay: {index * 0.1}s"
+                >
+                  {word}
+                </div>
+              {/each}
             </div>
-          {/each}
+          {/if}
+          
+          <!-- Obecne słowo (wycentrowane) -->
+          <div class="current-word-container">
+            <div class="word-item current">
+              {wordChain[wordChain.length - 1]}
+            </div>
+          </div>
         </div>
 
         <div class="input-section">
@@ -364,53 +375,106 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    min-height: 300px;
     margin-bottom: 3rem;
-    max-height: 400px;
-    overflow-y: auto;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .previous-words {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .current-word-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
   }
 
   .word-item {
     font-size: 2rem;
     font-weight: 700;
-    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
     padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: slideIn 0.5s ease-out;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    animation: slideInFromBottom 0.6s ease-out;
   }
 
   .word-item.current {
+    color: #ffffff;
     background: linear-gradient(45deg, #333333, #555555);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
+    transform: scale(1.1);
+    font-size: 2.5rem;
+    z-index: 10;
   }
 
-  .arrow {
-    font-size: 1.5rem;
-    color: #666;
-    margin: 0.5rem 0;
+  .word-item.previous {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.9);
+    font-size: 1.6rem;
+    animation: fadeInFromTop 0.4s ease-out;
   }
 
-  @keyframes slideIn {
+  .word-item.fade-1 {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(0.85);
+  }
+
+  .word-item.fade-2 {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    transform: scale(0.8);
+    font-size: 1.4rem;
+  }
+
+  .word-item.fade-3 {
+    color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+    transform: scale(0.75);
+    font-size: 1.2rem;
+  }
+
+
+
+  @keyframes slideInFromBottom {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(50px) scale(0.8);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes fadeInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 
