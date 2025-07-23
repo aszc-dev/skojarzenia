@@ -20,7 +20,10 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; 2025 Skojarzenia. Stworzono z pasją przez Adrian Szczepański & Cursor AI.</p>
+    <p>
+      Projekt open-source tworzony przy pomocy narzędzi AI. Zobacz kod na
+      <a href="https://github.com/aszc-dev/skojarzenia/" target="_blank" rel="noopener noreferrer">GitHub</a>.
+    </p>
   </footer>
 </div>
 
@@ -121,12 +124,22 @@
     border-top: 1px solid #333;
   }
 
+  .footer a {
+    color: #888;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  .footer a:hover {
+    color: #ffffff;
+  }
+
   @media (max-width: 768px) {
     .nav {
       flex-direction: column;
       gap: 1rem;
     }
-    
+
     .nav-links {
       gap: 1rem;
     }
