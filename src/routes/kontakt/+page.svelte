@@ -2,29 +2,6 @@
   import Mail from '@lucide/svelte/icons/mail';
   import Github from '@lucide/svelte/icons/github';
   import Discord from '@lucide/svelte/icons/message-circle';
-  let name = '';
-  let email = '';
-  let message = '';
-  
-  function handleSubmit(event: Event) {
-    event.preventDefault();
-    
-    const formData = new FormData(event.target as HTMLFormElement);
-    
-    fetch('/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(formData as any).toString()
-    })
-    .then(() => {
-      window.location.href = '/dziekujemy';
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  }
 </script>
 
 <svelte:head>
@@ -73,10 +50,8 @@
           class="contact-form" 
           name="contact"
           method="POST"
-          action="#"
+          action="/dziekujemy"
           data-netlify="true"
-          data-sveltekit-reload
-          on:submit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact" />
           <h2 class="form-title">NAPISZ DO NAS</h2>
@@ -87,7 +62,6 @@
               id="name"
               name="name"
               type="text"
-              bind:value={name}
               class="form-input"
               placeholder="JAK MASZ NA IMIĘ?"
               required
@@ -100,7 +74,6 @@
               id="email"
               name="email"
               type="email"
-              bind:value={email}
               class="form-input"
               placeholder="TWÓJ@EMAIL.COM"
               required
@@ -112,7 +85,6 @@
             <textarea
               id="message"
               name="message"
-              bind:value={message}
               class="form-textarea"
               placeholder="CO CHCESZ NAM PRZEKAZAĆ?"
               rows="5"

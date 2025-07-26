@@ -18,7 +18,7 @@ test.describe('Contact Form - Netlify Forms', () => {
     
     await expect(form).toHaveAttribute('name', 'contact');
     await expect(form).toHaveAttribute('method', 'POST');
-    await expect(form).toHaveAttribute('action', '#');
+    await expect(form).toHaveAttribute('action', '/dziekujemy');
 
   });
 
@@ -40,8 +40,7 @@ test.describe('Contact Form - Netlify Forms', () => {
 
   test('should have correct form configuration for Netlify', async ({ page }) => {
     const form = page.locator('.contact-form');
-    await expect(form).toHaveAttribute('action', '#');
-    await expect(form).toHaveAttribute('data-sveltekit-reload');
+    await expect(form).toHaveAttribute('action', '/dziekujemy');
     await expect(form).toHaveAttribute('method', 'POST');
     await expect(form).toHaveAttribute('name', 'contact');
   });
